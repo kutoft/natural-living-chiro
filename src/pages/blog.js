@@ -1,4 +1,5 @@
 import React from 'react'
+import { kebabCase } from 'lodash'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
@@ -7,8 +8,9 @@ export default class IndexPage extends React.Component {
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
+    const { group } = data.allMarkdownRemark
 
-    console.log(data)
+
     return (
       <Layout>
         <section className="section">
@@ -42,6 +44,17 @@ export default class IndexPage extends React.Component {
               ))}
           </div>
         </section>
+        <section>
+          <ul className="taglist">
+            {group.map(tag => (
+              <li key={tag.fieldValue}>
+                <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+                  {tag.fieldValue} ({tag.totalCount})
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </Layout>
     )
   }
@@ -51,16 +64,21 @@ IndexPage.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       edges: PropTypes.array,
+
     }),
   }),
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
+export const blogPageQuery = graphql`
+  query BlogPageQuery {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] },
       filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
     ) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
       edges {
         node {
           excerpt(pruneLength: 400)
@@ -72,6 +90,7 @@ export const pageQuery = graphql`
             title
             templateKey
             date(formatString: "MMMM DD, YYYY")
+            tags
           }
         }
       }
