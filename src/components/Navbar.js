@@ -76,6 +76,9 @@ const Navbar = class extends React.Component {
         </Link>
         <div className="navbar-item">
           <div className="buttons">
+            <Link className="button is-primary is-outlined" to="#">
+              Shop
+            </Link>
             <Link className="button is-primary" to="/schedule-appointment">
               Book Appointment
             </Link>
