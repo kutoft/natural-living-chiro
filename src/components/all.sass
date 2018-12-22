@@ -2,15 +2,27 @@
 
 // Config vars
 // Kalidi logo brand color: #FD461E
-$kaldi-red: #D64000
-$kaldi-red-invert: #fff
+$natural-prime: #00d1b2
+$natural-prime-invert: #fff
 
-$primary: $kaldi-red
-$primary-invert: $kaldi-red-invert
+$primary: $natural-prime
+$primary-invert: $natural-prime-invert
 $body-color: #333
+
+@import "~bulma"
 
 .navbar .navbar-menu
   box-shadow:none !important
+
+.navbar-brand .navbar-item
+  padding: 1.25rem 0.7rem
+
+.navbar-item
+  @include from($tablet)
+    padding: 1.25rem 0.75rem
+
+.navbar-burger
+  height: auto
 
 .content .taglist
   list-style: none
@@ -43,5 +55,3 @@ $body-color: #333
 
 .margin-top-0
   margin-top: 0 !important
-
-@import "~bulma"

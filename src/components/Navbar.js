@@ -34,7 +34,10 @@ const Navbar = class extends React.Component {
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item" title="Logo">
+          <span className="is-size-4 is-marginless">Natural Living <span className="is-size-7">Chiropractic</span></span>
+          {/*
           <img src={logo} alt="Natural Living Chiropractic" style={{ width: '88px' }} />
+          */}
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
@@ -44,21 +47,40 @@ const Navbar = class extends React.Component {
         </div>
       </div>
       <div id="navMenu" className="navbar-menu">
-      <div className="navbar-start has-text-centered">
-        <Link className="navbar-item" to="/services">
-          Services
-        </Link>
-        <Link className="navbar-item" to="/blog">
-          Blog
+      <div className="navbar-end">
+        <div className="navbar-item has-dropdown is-hoverable">
+          <Link className="navbar-link" to="/services">
+            Services
+          </Link>
+          <div className="navbar-dropdown">
+           {/* get dynamic list from graphql */}
+            <Link className="navbar-item" to="/services">
+              Service 1
+            </Link>
+            <Link className="navbar-item" to="/services">
+              Service 2
+            </Link>
+          </div>
+        </div>
+        <Link className="navbar-item" to="/new-patient">
+          New Patients
         </Link>
         <Link className="navbar-item" to="/about">
           About
         </Link>
+        <Link className="navbar-item" to="/blog">
+          Blog
+        </Link>
         <Link className="navbar-item" to="/contact">
           Contact
         </Link>
-      </div>
-      <div className="navbar-end has-text-centered">
+        <div className="navbar-item">
+          <div className="buttons">
+            <Link className="button is-primary" to="/schedule-appointment">
+              Book Appointment
+            </Link>
+          </div>
+        </div>
       </div>
       </div>
     </div>

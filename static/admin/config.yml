@@ -1,6 +1,8 @@
 backend:
-  name: github
-  repo: kutoft/natural-living-chiro
+  # name: github
+  # repo: kutoft/natural-living-chiro
+  name: git-gateway
+  branch: master
 
 media_folder: static/img
 public_folder: /img
@@ -8,9 +10,10 @@ public_folder: /img
 collections:
   - name: "blog"
     label: "Blog"
-    folder: "src/pages/blog"
+    label_singular: "Article"
+    folder: "src/pages/articles"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
       - {label: "Title", name: "title", widget: "string"}
@@ -19,10 +22,10 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list"}
 
-  - name: "service"
-    label: "Service"
+  - name: "services"
+    label: "Services"
     label_singular: "Service"
-    folder: "src/pages/services"
+    folder: "src/pages/service"
     create: true
     slug: "{{slug}}"
     fields:
@@ -40,8 +43,8 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
       - file: "src/pages/services/index.md"
-        label: "Services Page"
-        name: "services"
+        label: "Services Landing Page"
+        name: "services-landing"
         fields:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "services-page"}
           - {label: Title, name: title, widget: string}
