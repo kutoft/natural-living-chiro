@@ -33,11 +33,8 @@ const Navbar = class extends React.Component {
   <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
     <div className="container">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item" title="Logo">
-          <span className="is-size-4 is-marginless">Natural Living <span className="is-size-7">Chiropractic</span></span>
-          {/*
-          <img src={logo} alt="Natural Living Chiropractic" style={{ width: '88px' }} />
-          */}
+        <Link to="/" className="navbar-item" title="Logo" style={{ padding: '0.5rem 0.75rem' }}>
+          <img src={logo} alt="Natural Living Chiropractic" style={{ width: '210px', maxHeight: '50px' }} />
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
