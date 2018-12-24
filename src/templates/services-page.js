@@ -20,7 +20,7 @@ export const ServicesPageTemplate = ({
 }) => (
   <div className="container">
     <div className="columns">
-      <div className="column is-10 is-offset-1">
+      <div className="column is-8 is-offset-2">
         <div className="content">
           <div
             className="full-width-image-container margin-top-0"

@@ -36,28 +36,41 @@ export default class IndexPage extends React.Component {
             <div className="content">
               <h2 className="has-text-weight-bold">Services</h2>
             </div>
+            <div className="columns is-variable is-3-mobile is-6-desktop" style={{alignItems: 'stretch'}}>
             {services
               .map(({ node: service }) => (
-                <div
-                  className="content"
-                  style={{ border: '1px solid #333', padding: '2em 4em' }}
-                  key={service.id}
-                >
-                  <p>
-                    <Link className="has-text-primary" to={service.fields.slug}>
-                      {service.frontmatter.title}
-                    </Link>
-                  </p>
-                  <p>
-                    <Link className="button is-small" to={service.fields.slug}>
-                      Learn More →
-                    </Link>
-                  </p>
+                <div className="column is-one-quarter" style={{display: "flex"}} key={service.id}>
+                  <div
+                    className="content"
+                    style={{ border: '1px solid #333' }}
+                  >
+                    <div className="image is-5by3">
+                      <img alt={service.frontmatter.thumbnail.alt} src={"/img/"+service.frontmatter.thumbnail.image.relativePath} />
+                    </div>
+                    <div className="" style={{ padding: '1em 2em' }}>
+                      <h4>
+                        <Link className="has-text-primary" to={service.fields.slug}>
+                          {service.frontmatter.title}
+                        </Link>
+                      </h4>
+                      <p>
+                        <Link className="has-text-dark" to={service.fields.slug}>
+                          {service.frontmatter.description}
+                        </Link>
+                      </p>
+                      <p>
+                        <Link className="button is-small" to={service.fields.slug}>
+                          Learn More →
+                        </Link>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
+              </div>
           </div>
         </section>
-        <section className="section is-medium" style={{backgroundImage: 'url(/img/jumbotron.jpg)', backgroundSize: "cover"}}>
+        <section className="section is-medium has-bg-covered has-bg-centered" style={{backgroundImage: 'url(/img/jumbotron.jpg)', backgroundSize: "cover"}}>
           <div className="container">
             <div className="columns is-desktop">
               <div className="column is-8 is-offset-2">
@@ -80,27 +93,31 @@ export default class IndexPage extends React.Component {
             <div className="columns is-variable is-3-mobile is-6-desktop" style={{alignItems: 'stretch'}}>
             {blogs
               .map(({ node: post }) => (
-                <div className="column" style={{display: "flex"}}>
+                <div className="column" style={{display: "flex"}} key={post.id}>
                   <div
                     className="content has-text-left"
-                    style={{ border: '1px solid #333', padding: '2em 4em' }}
-                    key={post.id}
+                    style={{ border: '1px solid #333' }}
                   >
-                    <h4>
-                      <Link className="has-text-primary" to={post.fields.slug}>
-                        {post.frontmatter.title}
-                      </Link>
-                    </h4>
-                    <p>
-                      <Link className="has-text-dark" to={post.fields.slug}>
-                        {post.frontmatter.description}
-                      </Link>
-                    </p>
-                    <p>
-                      <Link className="button is-small" to={post.fields.slug}>
-                        Learn More →
-                      </Link>
-                    </p>
+                    <div className="image is-5by3">
+                      <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+post.frontmatter.thumbnail.image.relativePath} />
+                    </div>
+                    <div className="" style={{ padding: '2em 4em' }}>
+                      <h4>
+                        <Link className="has-text-primary" to={post.fields.slug}>
+                          {post.frontmatter.title}
+                        </Link>
+                      </h4>
+                      <p>
+                        <Link className="has-text-dark" to={post.fields.slug}>
+                          {post.frontmatter.description}
+                        </Link>
+                      </p>
+                      <p>
+                        <Link className="button is-small" to={post.fields.slug}>
+                          Learn More →
+                        </Link>
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -110,7 +127,7 @@ export default class IndexPage extends React.Component {
               </Link>
           </div>
         </section>
-        <section className="section is-medium" style={{backgroundImage: 'url(/img/products-full-width.jpg)', backgroundSize: "cover"}}>
+        <section className="section is-medium has-bg-covered has-bg-centered" style={{backgroundImage: 'url(/img/products-full-width.jpg)', backgroundSize: "cover"}}>
           <div className="container">
             <div className="columns is-desktop">
               <div className="column is-8 is-offset-2">
@@ -145,7 +162,32 @@ export const homePageQuery = graphql`
   query HomePageQuery {
     services: allMarkdownRemark(
       filter: { frontmatter: { templateKey: { eq: "service-page" } }},
-      limit: 6
+      limit: 4
+    ) {
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            templateKey
+            title
+            description
+            thumbnail {
+              alt
+              image {
+                id
+                relativePath
+              }
+            }
+          }
+        }
+      }
+    },
+    blogs: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "blog-post" } }},
+      limit: 3
     ) {
       edges {
         node {
@@ -157,29 +199,18 @@ export const homePageQuery = graphql`
             title
             templateKey
             date(formatString: "MMMM DD, YYYY")
+            description
+            thumbnail {
+              alt
+              image {
+                id
+                relativePath
+              }
+            }
+            tags
           }
         }
       }
-    },
-    blogs: allMarkdownRemark(
-        filter: { frontmatter: { templateKey: { eq: "blog-post" } }},
-        limit: 3
-      ) {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              templateKey
-              date(formatString: "MMMM DD, YYYY")
-              description
-              tags
-            }
-          }
-        }
-      }
+    }
   }
 `
