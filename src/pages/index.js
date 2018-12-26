@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import Accordion from '../components/Accordion'
 
 export default class IndexPage extends React.Component {
+
   render() {
     const { data } = this.props
     const { edges: services } = data.services
@@ -31,6 +33,52 @@ export default class IndexPage extends React.Component {
             </div>
           </div>
         </section>
+
+        {/*
+        <section className="section is-medium has-background-light has-bg-tablet has-bg-contained has-bg-left" style={{backgroundImage: 'url(/img/coffee-gear.png)'}}>
+          <div className="container">
+            <div className="columns">
+              <div className="column is-10-desktop is-offset-1-desktop">
+                <div className="columns">
+                  <div className="column is-5-tablet is-offset-7-tablet is-6-widescreen is-offset-6-widescreen">
+                    <div className="content">
+                      <h3 className="">Why Natural Living?</h3>
+                      <p className="">We are proud to offer a wide range of comprehensive services to meet the needs of adults, seniors, and pediatric patients.</p>
+                      <Link className="button is-primary is-medium" to="/services">
+                       See All Services
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        */}
+
+        <section className="section is-medium">
+          <div className="container">
+            <div className="columns is-variable is-6-desktop">
+              <div className="column is-half has-bg has-bg-contained has-bg-top" style={{backgroundImage: 'url(/img/coffee-gear.png)'}}>
+              </div>
+              <div className="column is-half">
+                <div className="content">
+                  <h2 className="">Services At Natural Living?</h2>
+                  <p className="">We are proud to offer a wide range of comprehensive services to meet the needs of adults, seniors, and pediatric patients.</p>
+                </div>
+                {services
+                .map(({ node: service }, index) => (
+                  <Accordion index={index} data={service}></Accordion>
+                ))}
+                <Link className="button is-primary is-medium" to="/services">
+                 See All Services
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/*
         <section className="section is-medium">
           <div className="container">
             <div className="content">
@@ -67,10 +115,15 @@ export default class IndexPage extends React.Component {
                   </div>
                 </div>
               ))}
+              <Link className="button is-primary is-medium" to="/services">
+               See All Services
+              </Link>
               </div>
           </div>
         </section>
-        <section className="section is-medium has-bg-covered has-bg-centered" style={{backgroundImage: 'url(/img/jumbotron.jpg)', backgroundSize: "cover"}}>
+        */}
+
+        <section className="section is-medium has-bg has-bg-covered has-bg-center" style={{backgroundImage: 'url(/img/spa-home-blue-bg.jpg)'}}>
           <div className="container">
             <div className="columns is-desktop">
               <div className="column is-8 is-offset-2">
@@ -81,6 +134,37 @@ export default class IndexPage extends React.Component {
                    Book Appointment
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="columns is-gapless">
+            <div className="column is-one-third has-background-secondary">
+              <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
+                <h3 className="has-text-white">Have A Question?</h3>
+                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
+                <Link className="button is-primary is-outlined is-inverted" to="/contact">
+                 Ask A Question
+                </Link>
+              </div>
+            </div>
+            <div className="column is-one-third has-background-primary">
+              <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
+                <h3 className="has-text-white">Have A Question?</h3>
+                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
+                <Link className="button is-primary is-outlined is-inverted" to="/contact">
+                 Ask A Question
+                </Link>
+              </div>
+            </div>
+            <div className="column is-one-third has-background-primary-light">
+              <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
+                <h3 className="has-text-white">Have A Question?</h3>
+                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
+                <Link className="button is-primary is-outlined is-inverted" to="/contact">
+                 Ask A Question
+                </Link>
               </div>
             </div>
           </div>
@@ -127,7 +211,7 @@ export default class IndexPage extends React.Component {
               </Link>
           </div>
         </section>
-        <section className="section is-medium has-bg-covered has-bg-centered" style={{backgroundImage: 'url(/img/products-full-width.jpg)', backgroundSize: "cover"}}>
+        <section className="section is-medium has-bg has-bg-covered has-bg-center" style={{backgroundImage: 'url(/img/products-full-width.jpg)'}}>
           <div className="container">
             <div className="columns is-desktop">
               <div className="column is-8 is-offset-2">

@@ -1,0 +1,61 @@
+import React from 'react'
+import { Link } from 'gatsby'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/pro-light-svg-icons'
+
+const Accordion = class extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      class: "card-content"
+    };
+  }
+
+  handleAccordion = (id, e) => {
+    e.preventDefault();
+    if(this.state.open) {
+      this.setState({
+        open: false,
+        class: "card-content"
+      });
+    } else {
+      this.setState({
+        open: true,
+        class: "card-content open"
+      });
+    }
+  };
+
+  componentDidMount() {
+
+  }
+
+ render() {
+   return (
+     <div className="card" key={this.props.index} style={{marginBottom: "20px"}} onClick={this.handleAccordion.bind(this, this.props.index)}>
+       <header className="card-header has-background-secondary">
+         <a href="#" className="card-header-icon" aria-label="more options" style={{display: "flex", alignItems: "center", width: "100%", padding: "0"}}>
+           <span className="icon has-text-white" style={{padding: "0 10px 0 20px"}}>
+             <FontAwesomeIcon icon={faPlus} />
+           </span>
+           <h4 className="card-header-title has-text-white" >
+             {this.props.data.frontmatter.title}
+           </h4>
+         </a>
+       </header>
+       <div className={this.state.open ? "card-content open" : "card-content"} id={this.props.data.id}>
+         <div className="content">
+           <p>
+             {this.props.data.frontmatter.description}
+           </p>
+           <Link className="button is-small" to={this.props.data.fields.slug}>
+             Learn More →
+           </Link>
+         </div>
+       </div>
+     </div>
+  )}
+}
+
+export default Accordion

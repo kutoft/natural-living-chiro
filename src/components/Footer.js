@@ -76,8 +76,8 @@ const Footer = class extends React.Component {
             <div className="content">
               <h3>Hours</h3>
               <ul style={{margin: "0"}}>
-                {this.hours.map(({day:day}) => (
-                  <li style={{paddingLeft: "0", listStyleType: "none"}}>
+                {this.hours.map(({day:day}, index) => (
+                  <li key={index} style={{paddingLeft: "0", listStyleType: "none"}}>
                     <span className="hour-day" style={{display: "inline-block", width: "100px"}}>{day.name}</span>
                     <span className="tag">
                       <span className="hour-open">{day.open}</span>
