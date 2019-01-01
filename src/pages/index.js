@@ -59,7 +59,10 @@ export default class IndexPage extends React.Component {
         <section className="section is-medium">
           <div className="container">
             <div className="columns is-variable is-6-desktop">
-              <div className="column is-half has-bg has-bg-contained has-bg-top" style={{backgroundImage: 'url(/img/coffee-gear.png)'}}>
+              <div className="column is-half">
+                <figure class="image">
+                  <img src="/img/coffee-gear.png" alt="coffee" />
+                </figure>
               </div>
               <div className="column is-half">
                 <div className="content">
