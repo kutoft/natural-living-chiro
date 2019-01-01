@@ -56,6 +56,50 @@ const Footer = class extends React.Component {
         }
       }
     ];
+    this.menu = [
+      {
+        "link": {
+          "name": "Services",
+          "to": "/services"
+        }
+      },
+      {
+        "link": {
+          "name": "Service 1",
+          "to": "/services"
+        }
+      },
+      {
+        "link": {
+          "name": "Service 2",
+          "to": "/services"
+        }
+      },
+      {
+        "link": {
+          "name": "New Patients",
+          "to": "/new-patients"
+        }
+      },
+      {
+        "link": {
+          "name": "About",
+          "to": "/about"
+        }
+      },
+      {
+        "link": {
+          "name": "Blog",
+          "to": "/blog"
+        }
+      },
+      {
+        "link": {
+          "name": "Contact",
+          "to": "/contact"
+        }
+      },
+    ];
   }
 
   componentDidMount() {
@@ -68,9 +112,35 @@ const Footer = class extends React.Component {
       <div className="container">
         <div className="columns">
           <div className="column is-narrow">
-            <img src={logo} alt="Natural Living Chiropractic" style={{ width: '210px', maxHeight: '50px' }} />
+            <img src={logo} alt="Natural Living Chiropractic" style={{ width: '210px', maxHeight: '50px', marginRight: "20px" }} />
+            <ul style={{marginTop: "6rem"}}>
+              <li>
+                <Link className="button is-primary is-outlined is-fullwidth" to="#" style={{marginBottom: "5px"}}>
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link className="button is-primary is-outlined is-fullwidth" to="/schedule-appointment" style={{marginBottom: "5px"}}>
+                  Book Appointment
+                </Link>
+              </li>
+            </ul>
           </div>
           <div className="column">
+          </div>
+          <div className="column is-narrow" style={{minWidth: "175px"}}>
+            <div className="content">
+              <h3>Menu</h3>
+              <ul style={{margin: "0"}}>
+                {this.menu.map(({link:link}, index) => (
+                  <li key={index} style={{paddingLeft: "0", listStyleType: "none"}}>
+                    <Link className="has-text-primary" to={link.to}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="column is-narrow">
             <div className="content">

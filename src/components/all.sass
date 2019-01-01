@@ -107,6 +107,8 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 .has-bg-right
   background-position: center right
 
+.has-text-secondary
+  color: $secondary
 .has-background-secondary
   background-color: $secondary
 .has-background-primary-light
@@ -122,3 +124,8 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
   display: none
   &.open
     display: block
+
+
+.blog-post .blog-title
+  @include from($tablet)
+    margin-right: -6rem

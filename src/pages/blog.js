@@ -18,31 +18,39 @@ export default class IndexPage extends React.Component {
             <div className="columns">
               <div className="column is-8 is-offset-2">
                 <div className="content">
-                  <h1 className="has-text-weight-bold is-size-2">Blog</h1>
+                  <h1 className="has-text-weight-bold is-size-2">Latest Blog Posts</h1>
                 </div>
                 {posts
                   .map(({ node: post }) => (
-                    <div
-                      className="content"
-                      style={{ border: '1px solid #333', padding: '2em 4em' }}
-                      key={post.id}
-                    >
-                      <p>
-                        <Link className="has-text-primary" to={post.fields.slug}>
-                          {post.frontmatter.title}
-                        </Link>
-                        <span> &bull; </span>
-                        <small>{post.frontmatter.date}</small>
-                      </p>
-                      <p>
-                        {post.excerpt}
-                        <br />
-                        <br />
-                        <Link className="button is-small" to={post.fields.slug}>
-                          Keep Reading →
-                        </Link>
-                      </p>
+                    <Link className="blog-post has-text-dark" key={post.id} to={post.fields.slug} style={{display: "block", marginBottom: "3rem"}}>
+                    <div className="columns">
+                      <div className="column" style={{zIndex: "1"}}>
+                        <div className="content">
+                          <small className="tag is-primary has-text-secondary" style={{borderRadius: "0"}}>{post.frontmatter.date}</small>
+                          <h2 className="has-text-primary has-background-white blog-title" style={{padding: "1rem", marginTop: "0", marginBottom: "1rem"}}>
+                            {post.frontmatter.title}
+                          </h2>
+                          <p>
+                            {post.excerpt}
+                          </p>
+                          <p className="tags">
+                            {post.frontmatter.tags.map((tag, index) => (
+                              <span key={index} style={{display: "inline-block", marginRight: "5px"}}>
+                                <Link className="tag" to={`/tags/${kebabCase(tag)}/`}>
+                                  {tag}
+                                </Link>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="column">
+                        <figure className="image">
+                          <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+post.frontmatter.thumbnail.image.relativePath} />
+                        </figure>
+                      </div>
                     </div>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -85,7 +93,7 @@ export const blogPageQuery = graphql`
       }
       edges {
         node {
-          excerpt(pruneLength: 400)
+          excerpt(pruneLength: 100)
           id
           fields {
             slug
@@ -94,6 +102,13 @@ export const blogPageQuery = graphql`
             title
             templateKey
             date(formatString: "MMMM DD, YYYY")
+            thumbnail {
+              alt
+              image {
+                id
+                relativePath
+              }
+            }
             tags
           }
         }

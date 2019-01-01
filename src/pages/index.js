@@ -34,28 +34,6 @@ export default class IndexPage extends React.Component {
           </div>
         </section>
 
-        {/*
-        <section className="section is-medium has-background-light has-bg-tablet has-bg-contained has-bg-left" style={{backgroundImage: 'url(/img/coffee-gear.png)'}}>
-          <div className="container">
-            <div className="columns">
-              <div className="column is-10-desktop is-offset-1-desktop">
-                <div className="columns">
-                  <div className="column is-5-tablet is-offset-7-tablet is-6-widescreen is-offset-6-widescreen">
-                    <div className="content">
-                      <h3 className="">Why Natural Living?</h3>
-                      <p className="">We are proud to offer a wide range of comprehensive services to meet the needs of adults, seniors, and pediatric patients.</p>
-                      <Link className="button is-primary is-medium" to="/services">
-                       See All Services
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        */}
-
         <section className="section is-medium">
           <div className="container">
             <div className="columns is-variable is-6-desktop">
