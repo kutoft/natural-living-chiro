@@ -6,7 +6,7 @@ description: >-
   Brewing with a Chemex probably seems like a complicated, time-consuming
   ordeal, but once you get used to the process, it becomes a soothing ritual
   that's worth the effort every time.
-thumbnail: 
+thumbnail:
   alt: A close-up of a paper filter filled with ground coffee
   image: /img/products-grid3.jpg
 tags:

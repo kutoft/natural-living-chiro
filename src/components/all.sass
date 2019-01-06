@@ -42,7 +42,7 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 .navbar-burger
   height: auto
 
-.content .taglist
+.content .taglist, .taglist
   list-style: none
   margin-bottom: 0
   margin-left: 0
@@ -53,9 +53,15 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
   justify-content: left
   align-items: center
   li
-    padding: 0 2rem 1rem 0
-    margin-bottom: 1.5rem
+    padding: 0 5px
+    margin-bottom: 1rem
     margin-top: 0
+    a
+      transition: 0.3s ease-in-out background-color, 0.3s ease-in-out color
+      &:hover
+        background-color: $primary-light
+        color: $white
+        text-decoration: none
 
 .footer
   background: $dark
@@ -75,7 +81,15 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
   background-position: bottom
   display: flex
   justify-content: center
-  align-items: center
+  align-items: flex-end
+  .title
+    margin-bottom: 0
+    color: $white
+    padding: 1rem 1.25rem
+    @include until($tablet)
+      font-size: 2rem
+    @include from($tablet)
+      max-width: 83.3333%
 
 .margin-top-0
   margin-top: 0 !important
@@ -114,18 +128,55 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 .has-background-primary-light
   background-color: $primary-light
 
+.has-text-primary
+  transition: 0.3s ease-in-out color
+  &:hover
+    color: $primary-light !important
+
+
 .image.is-square, .image.is-1by1, .image.is-5by4, .image.is-4by3, .image.is-3by2, .image.is-5by3, .image.is-16by9, .image.is-2by1, .image.is-3by1, .image.is-4by5, .image.is-3by4, .image.is-2by3, .image.is-3by5, .image.is-9by16, .image.is-1by2, .image.is-1by3
   overflow: hidden
 
 .image.is-square img, .image.is-1by1 img, .image.is-5by4 img, .image.is-4by3 img, .image.is-3by2 img, .image.is-5by3 img, .image.is-16by9 img, .image.is-2by1 img, .image.is-3by1 img, .image.is-4by5 img, .image.is-3by4 img, .image.is-2by3 img, .image.is-3by5 img, .image.is-9by16 img, .image.is-1by2 img, .image.is-1by3 img
   height: auto
 
-.card .card-content
-  display: none
+.card
+  .card-header
+    background-color: $secondary
+    &:hover
+      background-color: darken($secondary, 7)
+  .card-content
+    display: none
   &.open
-    display: block
+    .card-header
+      background-color: darken($secondary, 15)
+      &:hover
+        background-color: darken($secondary, 7)
+    .card-content
+      display: block
 
 
-.blog-post .blog-title
-  @include from($tablet)
-    margin-right: -6rem
+.blog-post
+  .blog-title
+    transition: 0.3s ease-in-out color
+    color: $primary
+    margin-right: -4rem
+    @include until(410px)
+      font-size: 1.125rem
+    @media screen and (min-width: 410px) and (max-width: 768px)
+      font-size: 1.25rem
+    @include from($tablet)
+      margin-right: -6rem
+  .description, .tags
+    transition: 0.3s ease-in-out color
+    @include until(410px)
+      margin-right: -100%
+  .date
+    transition: 0.3s ease-in-out background-color
+  &:hover
+    .blog-title
+      color: $primary-light
+    .description
+      color: $black
+    .date
+      background-color: $primary-light

@@ -33,18 +33,18 @@ const Accordion = class extends React.Component {
 
  render() {
    return (
-     <div className="card" key={this.props.index} style={{marginBottom: "20px"}} onClick={this.handleAccordion.bind(this, this.props.index)}>
+     <div className={this.state.open ? "card open" : "card"} key={this.props.index} style={{marginBottom: "20px"}} onClick={this.handleAccordion.bind(this, this.props.index)}>
        <header className="card-header has-background-secondary">
-         <a href="#" className="card-header-icon" aria-label="more options" style={{display: "flex", alignItems: "center", width: "100%", padding: "0"}}>
+         <div className="card-header-icon" aria-label="more options" style={{display: "flex", alignItems: "center", width: "100%", padding: "0"}}>
            <span className="icon has-text-white" style={{padding: "0 10px 0 20px"}}>
              <FontAwesomeIcon icon={faPlus} />
            </span>
            <h4 className="card-header-title has-text-white" >
              {this.props.data.frontmatter.title}
            </h4>
-         </a>
+         </div>
        </header>
-       <div className={this.state.open ? "card-content open" : "card-content"} id={this.props.data.id}>
+       <div className="card-content" id={this.props.data.id}>
          <div className="content">
            <p>
              {this.props.data.frontmatter.description}

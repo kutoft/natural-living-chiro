@@ -9,10 +9,13 @@ import Content, { HTMLContent } from '../components/Content'
 export const BlogPostTemplate = ({
   content,
   contentComponent,
+  date,
   description,
+  image,
   tags,
   title,
   helmet,
+  pathContext
 }) => {
   const PostContent = contentComponent || Content
 
@@ -22,10 +25,23 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column is-8 is-offset-2">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>{description}</p>
+            <div className="content" style={{marginTop: "-3rem"}}>
+              <div
+                className="full-width-image-container margin-top-0"
+                style={{
+                  backgroundImage: `url(${
+                    !!image.childImageSharp
+                      ? image.childImageSharp.fluid.src
+                      : image.relativePath})`,
+                }}
+              >
+                <h1 className="title has-text-weight-bold has-background-secondary">
+                  {title}
+                </h1>
+              </div>
+            </div>
+            <small className="date tag is-primary has-text-secondary" style={{borderRadius: "0"}}>{date}</small>
+            <h2 style={{lineHeight: "1.5", marginBottom: "2rem"}}>{description}</h2>
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
@@ -33,7 +49,7 @@ export const BlogPostTemplate = ({
                 <ul className="taglist">
                   {tags.map(tag => (
                     <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+                      <Link className="tag" to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
                     </li>
                   ))}
                 </ul>
@@ -46,11 +62,14 @@ export const BlogPostTemplate = ({
   )
 }
 
+
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
+  date: PropTypes.string,
   description: PropTypes.string,
   title: PropTypes.string,
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   helmet: PropTypes.object,
 }
 
@@ -62,6 +81,7 @@ const BlogPost = ({ data }) => {
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
+        date={post.frontmatter.date}
         description={post.frontmatter.description}
         helmet={
           <Helmet
@@ -71,6 +91,7 @@ const BlogPost = ({ data }) => {
             <meta name="description" content={`${post.frontmatter.description}`} />
           </Helmet>
         }
+        image={post.frontmatter.thumbnail.image}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
@@ -94,7 +115,20 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        path
         description
+        thumbnail {
+          alt
+          image {
+            id
+            relativePath
+            childImageSharp {
+              fluid(maxWidth: 526, quality: 92) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
         tags
       }
     }

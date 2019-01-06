@@ -1,4 +1,5 @@
 import React from 'react'
+import { kebabCase } from 'lodash'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
@@ -38,7 +39,7 @@ export default class IndexPage extends React.Component {
           <div className="container">
             <div className="columns is-variable is-6-desktop">
               <div className="column is-half">
-                <figure class="image">
+                <figure className="image">
                   <img src="/img/coffee-gear.png" alt="coffee" />
                 </figure>
               </div>
@@ -49,7 +50,7 @@ export default class IndexPage extends React.Component {
                 </div>
                 {services
                 .map(({ node: service }, index) => (
-                  <Accordion index={index} data={service}></Accordion>
+                  <Accordion key={index} data={service}></Accordion>
                 ))}
                 <Link className="button is-primary is-medium" to="/services">
                  See All Services
@@ -150,46 +151,57 @@ export default class IndexPage extends React.Component {
             </div>
           </div>
         </section>
-        <section className="section is-medium has-text-centered">
+        <section className="section is-medium">
           <div className="container">
-            <div className="content">
+            <div className="content has-text-centered">
               <h2 className="has-text-weight-bold">Blog</h2>
             </div>
             <div className="columns is-variable is-3-mobile is-6-desktop" style={{alignItems: 'stretch'}}>
             {blogs
               .map(({ node: post }) => (
-                <div className="column" style={{display: "flex"}} key={post.id}>
-                  <div
-                    className="content has-text-left"
-                    style={{ border: '1px solid #333' }}
-                  >
-                    <div className="image is-5by3">
-                      <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+post.frontmatter.thumbnail.image.relativePath} />
+                <div className="column blog-post" key={post.id} style={{display: "block", marginBottom: "3rem"}}>
+                  <div className="columns is-mobile">
+                    <div className="column" style={{zIndex: "1"}}>
+                      <div className="content">
+                        <Link to={post.fields.slug}>
+                          <small className="date tag is-primary has-text-secondary" style={{borderRadius: "0"}}>{post.frontmatter.date}</small>
+                          <h2 className="has-background-white blog-title" style={{padding: "1rem", marginTop: "0", marginBottom: "1rem"}}>
+                            {post.frontmatter.title}
+                          </h2>
+                          <p className="description has-text-dark">
+                            {post.excerpt}
+                          </p>
+                        </Link>
+                        <ul className="taglist">
+                          {post.frontmatter.tags.map((tag, index) => (
+                            <li key={index}>
+                              <Link className="tag" to={`/tags/${kebabCase(tag)}/`}>
+                                {tag}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <div className="" style={{ padding: '2em 4em' }}>
-                      <h4>
-                        <Link className="has-text-primary" to={post.fields.slug}>
-                          {post.frontmatter.title}
-                        </Link>
-                      </h4>
-                      <p>
-                        <Link className="has-text-dark" to={post.fields.slug}>
-                          {post.frontmatter.description}
-                        </Link>
-                      </p>
-                      <p>
-                        <Link className="button is-small" to={post.fields.slug}>
-                          Learn More →
-                        </Link>
-                      </p>
+                    <div className="column">
+                      <Link to={post.fields.slug}>
+                      <figure className="image">
+                        <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+
+                          !!post.frontmatter.thumbnail.image.childImageSharp
+                            ? post.frontmatter.thumbnail.image.childImageSharp.fluid.src
+                            : post.frontmatter.thumbnail.image.relativePath} />
+                      </figure>
+                      </Link>
                     </div>
                   </div>
                 </div>
               ))}
               </div>
-              <Link className="button is-primary is-centered" to="/blog">
-                View All Posts
-              </Link>
+              <div className="has-text-centered">
+                <Link className="button is-primary is-centered" to="/blog">
+                  View All Posts
+                </Link>
+              </div>
           </div>
         </section>
         <section className="section is-medium has-bg has-bg-covered has-bg-center" style={{backgroundImage: 'url(/img/products-full-width.jpg)'}}>
@@ -252,10 +264,11 @@ export const homePageQuery = graphql`
     },
     blogs: allMarkdownRemark(
       filter: { frontmatter: { templateKey: { eq: "blog-post" } }},
-      limit: 3
+      limit: 2
     ) {
       edges {
         node {
+          excerpt(pruneLength: 100)
           id
           fields {
             slug
@@ -270,6 +283,11 @@ export const homePageQuery = graphql`
               image {
                 id
                 relativePath
+                childImageSharp {
+                  fluid(maxWidth: 526, quality: 92) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
             tags

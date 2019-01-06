@@ -22,40 +22,48 @@ export default class IndexPage extends React.Component {
                 </div>
                 {posts
                   .map(({ node: post }) => (
-                    <Link className="blog-post has-text-dark" key={post.id} to={post.fields.slug} style={{display: "block", marginBottom: "3rem"}}>
-                    <div className="columns">
-                      <div className="column" style={{zIndex: "1"}}>
-                        <div className="content">
-                          <small className="tag is-primary has-text-secondary" style={{borderRadius: "0"}}>{post.frontmatter.date}</small>
-                          <h2 className="has-text-primary has-background-white blog-title" style={{padding: "1rem", marginTop: "0", marginBottom: "1rem"}}>
-                            {post.frontmatter.title}
-                          </h2>
-                          <p>
-                            {post.excerpt}
-                          </p>
-                          <p className="tags">
-                            {post.frontmatter.tags.map((tag, index) => (
-                              <span key={index} style={{display: "inline-block", marginRight: "5px"}}>
-                                <Link className="tag" to={`/tags/${kebabCase(tag)}/`}>
-                                  {tag}
-                                </Link>
-                              </span>
-                            ))}
-                          </p>
+                    <div className="column blog-post" key={post.id} style={{display: "block", marginBottom: "3rem"}}>
+                      <div className="columns is-mobile">
+                        <div className="column" style={{zIndex: "1"}}>
+                          <div className="content">
+                            <Link to={post.fields.slug}>
+                              <small className="date tag is-primary has-text-secondary" style={{borderRadius: "0"}}>{post.frontmatter.date}</small>
+                              <h2 className="has-background-white blog-title" style={{padding: "1rem", marginTop: "0", marginBottom: "1rem"}}>
+                                {post.frontmatter.title}
+                              </h2>
+                              <p className="description has-text-dark">
+                                {post.excerpt}
+                              </p>
+                            </Link>
+                            <ul className="taglist">
+                              {post.frontmatter.tags.map((tag, index) => (
+                                <li key={index}>
+                                  <Link className="tag" to={`/tags/${kebabCase(tag)}/`}>
+                                    {tag}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="column">
+                          <Link to={post.fields.slug}>
+                          <figure className="image">
+                            <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+
+                              !!post.frontmatter.thumbnail.image.childImageSharp
+                                ? post.frontmatter.thumbnail.image.childImageSharp.fluid.src
+                                : post.frontmatter.thumbnail.image.relativePath} />
+                          </figure>
+                          </Link>
                         </div>
                       </div>
-                      <div className="column">
-                        <figure className="image">
-                          <img alt={post.frontmatter.thumbnail.alt} src={"/img/"+post.frontmatter.thumbnail.image.relativePath} />
-                        </figure>
-                      </div>
                     </div>
-                    </Link>
                   ))}
               </div>
             </div>
           </div>
         </section>
+        {/*
         <section>
           <ul className="taglist">
             {group.map(tag => (
@@ -67,6 +75,7 @@ export default class IndexPage extends React.Component {
             ))}
           </ul>
         </section>
+        */}
       </Layout>
     )
   }
@@ -107,6 +116,11 @@ export const blogPageQuery = graphql`
               image {
                 id
                 relativePath
+                childImageSharp {
+                  fluid(maxWidth: 526, quality: 92) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
             tags

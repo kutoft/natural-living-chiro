@@ -132,7 +132,7 @@ const Footer = class extends React.Component {
             <div className="content">
               <h3>Menu</h3>
               <ul style={{margin: "0"}}>
-                {this.menu.map(({link:link}, index) => (
+                {this.menu.map(({link}, index) => (
                   <li key={index} style={{paddingLeft: "0", listStyleType: "none"}}>
                     <Link className="has-text-primary" to={link.to}>
                       {link.name}
@@ -146,7 +146,7 @@ const Footer = class extends React.Component {
             <div className="content">
               <h3>Hours</h3>
               <ul style={{margin: "0"}}>
-                {this.hours.map(({day:day}, index) => (
+                {this.hours.map(({day}, index) => (
                   <li key={index} style={{paddingLeft: "0", listStyleType: "none"}}>
                     <span className="hour-day" style={{display: "inline-block", width: "100px"}}>{day.name}</span>
                     <span className="tag">
