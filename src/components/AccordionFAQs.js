@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/pro-light-svg-icons'
 
-const Accordion = class extends React.Component {
+const AccordionFAQs = class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,23 +39,20 @@ const Accordion = class extends React.Component {
            <span className="icon has-text-white" style={{padding: "0 10px 0 20px"}}>
              <FontAwesomeIcon icon={faPlus} />
            </span>
-           <h4 className="card-header-title has-text-white" >
-             {this.props.data.frontmatter.title}
+           <h4 className="card-header-title has-text-white is-size-6 is-marginless" >
+             {this.props.data.question}
            </h4>
          </div>
        </header>
        <div className="card-content" id={this.props.data.id}>
          <div className="content">
            <p>
-             {this.props.data.frontmatter.description}
+             {this.props.data.answer}
            </p>
-           <Link className="button is-small" to={this.props.data.fields.slug}>
-             Learn More →
-           </Link>
          </div>
        </div>
      </div>
   )}
 }
 
-export default Accordion
+export default AccordionFAQs

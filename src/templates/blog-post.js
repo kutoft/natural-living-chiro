@@ -14,8 +14,7 @@ export const BlogPostTemplate = ({
   image,
   tags,
   title,
-  helmet,
-  pathContext
+  helmet
 }) => {
   const PostContent = contentComponent || Content
 

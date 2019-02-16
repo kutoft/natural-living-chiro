@@ -3,7 +3,7 @@ import { kebabCase } from 'lodash'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Accordion from '../components/Accordion'
+import AccordionService from '../components/AccordionService'
 
 export default class IndexPage extends React.Component {
 
@@ -47,14 +47,14 @@ export default class IndexPage extends React.Component {
                 <div className="content">
                   <h2 className="">Services At Natural Living?</h2>
                   <p className="">We are proud to offer a wide range of comprehensive services to meet the needs of adults, seniors, and pediatric patients.</p>
+                  {services
+                  .map(({ node: service }, index) => (
+                    <AccordionService key={index} data={service}></AccordionService>
+                  ))}
+                  <Link className="button is-primary is-medium" to="/services">
+                   See All Services
+                  </Link>
                 </div>
-                {services
-                .map(({ node: service }, index) => (
-                  <Accordion key={index} data={service}></Accordion>
-                ))}
-                <Link className="button is-primary is-medium" to="/services">
-                 See All Services
-                </Link>
               </div>
             </div>
           </div>

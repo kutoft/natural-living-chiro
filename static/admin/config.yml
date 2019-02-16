@@ -22,7 +22,16 @@ collections:
       - {label: "Featured Image", name: "thumbnail", widget: "object", fields: [{label: Image, name: image, widget: image}, {label: Alt, name: alt, widget: string}]}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list"}
-
+      - label: "Related Services"
+        name: "Services"
+        widget: "list"
+        fields:
+          - label: "Service"
+            name: "service"
+            widget: "relation"
+            collection: "services"
+            searchFields: ["title", "description"]
+            valueField: "title"
   - name: "services"
     label: "Services"
     label_singular: "Service"
@@ -35,6 +44,16 @@ collections:
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Featured Image", name: "thumbnail", widget: "object", fields: [{label: Image, name: image, widget: image}, {label: Alt, name: alt, widget: string}]}
       - {label: "Body", name: "body", widget: "markdown"}
+      - label: "FAQs"
+        name: "faqs"
+        widget: "list"
+        fields:
+          - label: "Question"
+            name: "question"
+            widget: "string"
+          - label: "Answer"
+            name: "answer"
+            widget: "text"
   - name: "pages"
     label: "Pages"
     files:
@@ -59,3 +78,14 @@ collections:
           - {label: Testimonials, name: testimonials, widget: list, fields: [{label: Quote, name: quote, widget: string}, {label: Author, name: author, widget: string}]}
           - {label: Full_image, name: full_image, widget: image}
           - {label: Pricing, name: pricing, widget: object, fields: [{label: Heading, name: heading, widget: string}, {label: Description, name: description, widget: string}, {label: Plans, name: plans, widget: list, fields: [{label: Plan, name: plan, widget: string}, {label: Price, name: price, widget: string}, {label: Description, name: description, widget: string}, {label: Items, name: items, widget: list}]}]}
+      - file: "static/hours.yml"
+        label: "Hours"
+        name: "hours"
+        fields:
+          - label: Day
+            name: day
+            widget: list
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Open, name: open, widget: datetime, format: LT}
+              - {label: Close, name: close, widget: datetime, format: LT}

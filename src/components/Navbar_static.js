@@ -1,9 +1,35 @@
 import React from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
-import PropTypes from "prop-types"
+import { Link } from 'gatsby'
 import logo from '../img/logo.svg'
 
-const Navbar = ({ data }) => (
+const Navbar = class extends React.Component {
+
+  componentDidMount() {
+    // Get all "navbar-burger" elements
+   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    // Check if there are any navbar burgers
+   if ($navbarBurgers.length > 0) {
+
+     // Add a click event on each of them
+     $navbarBurgers.forEach( el => {
+       el.addEventListener('click', () => {
+
+         // Get the target from the "data-target" attribute
+         const target = el.dataset.target;
+         const $target = document.getElementById(target);
+
+         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+         el.classList.toggle('is-active');
+         $target.classList.toggle('is-active');
+
+       });
+     });
+   }
+ }
+
+ render() {
+   return (
+
   <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
     <div className="container">
       <div className="navbar-brand">
@@ -25,12 +51,12 @@ const Navbar = ({ data }) => (
           </Link>
           <div className="navbar-dropdown">
            {/* get dynamic list from graphql */}
-           {data.allMarkdownRemark.edges
-           .map(({ node: service }, index) => (
-             <Link className="navbar-item" key={index} to={service.fields.slug}>
-               {service.frontmatter.title}
-             </Link>
-           ))}
+            <Link className="navbar-item" to="/services">
+              Service 1
+            </Link>
+            <Link className="navbar-item" to="/services">
+              Service 2
+            </Link>
           </div>
         </div>
         <Link className="navbar-item" to="/new-patient">
@@ -59,38 +85,7 @@ const Navbar = ({ data }) => (
       </div>
     </div>
   </nav>
-)
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allMarkdownRemark(
-          filter: { frontmatter: { templateKey: { eq: "service-page" } } }
-        ) {
-          edges {
-            node {
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                templateKey
-                title
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={data => <Navbar data={data} {...props} />}
-  />
-)
-
-Navbar.propTypes = {
-  data: PropTypes.shape({
-    services: PropTypes.shape({
-      edges: PropTypes.array,
-    })
-  }),
+  )}
 }
+
+export default Navbar

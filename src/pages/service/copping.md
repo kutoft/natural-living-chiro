@@ -2,8 +2,11 @@
 templateKey: service-page
 title: Copping
 description: The Coffee Taster’s Flavor Wheel, the official resource used by coffee tasters, has been revised for the first time this year.
-thumbnail: 
+thumbnail:
   alt: A close-up of a paper filter filled with ground coffee
   image: /img/products-grid3.jpg
+faqs:
+  - question: Test question
+    answer: Test Answer
 ---
 Copping

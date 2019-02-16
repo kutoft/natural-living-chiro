@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import AccordionFAQs from '../components/AccordionFAQs'
 
-export const ServicePageTemplate = ({ title, image, content, contentComponent }) => {
+export const ServicePageTemplate = ({ title, image, description, content, contentComponent, faqs }) => {
   const PageContent = contentComponent || Content
 
   return (
@@ -30,7 +31,19 @@ export const ServicePageTemplate = ({ title, image, content, contentComponent })
             </div>
           </div>
           <div className="section">
+            <p>{description}</p>
+          </div>
+          <div className="section">
             <PageContent className="content" content={content} />
+          </div>
+          <div className="section">
+            <div className="content">
+              <h2>Frequestly Asked Questions</h2>
+              {faqs
+              .map((faq, index) => (
+                <AccordionFAQs key={index} data={faq}></AccordionFAQs>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -40,9 +53,11 @@ export const ServicePageTemplate = ({ title, image, content, contentComponent })
 
 ServicePageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
-  image: PropTypes.string,
+  image: PropTypes.object,
+  description: PropTypes.string,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
+  faqs: PropTypes.array,
 }
 
 const ServicePage = ({ data }) => {
@@ -54,7 +69,9 @@ const ServicePage = ({ data }) => {
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
         image={post.frontmatter.thumbnail.image}
+        description={post.frontmatter.description}
         content={post.html}
+        faqs={post.frontmatter.faqs}
       />
     </Layout>
   )
@@ -72,12 +89,17 @@ export const servicePageQuery = graphql`
       html
       frontmatter {
         title
+        description
         thumbnail {
           alt
           image {
             id
             relativePath
           }
+        }
+        faqs {
+          question
+          answer
         }
       }
     }
