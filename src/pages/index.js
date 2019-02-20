@@ -272,14 +272,12 @@ export const homePageQuery = graphql`
                 }
               }
               sections {
-                section {
-                  heading
-                  description
-                  backgroundColor
-                  link {
-                    text
-                    destination
-                  }
+                heading
+                description
+                backgroundColor
+                link {
+                  text
+                  destination
                 }
               }
               support {
