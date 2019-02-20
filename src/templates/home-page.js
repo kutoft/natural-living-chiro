@@ -261,13 +261,12 @@ query HomePage {
               }
             }
             sections {
-              section {
-                heading
-                description
-                link {
-                  text
-                  destination
-                }
+              heading
+              description
+              backgroundColor
+              link {
+                text
+                destination
               }
             }
             support {
