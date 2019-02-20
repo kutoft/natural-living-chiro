@@ -65,18 +65,6 @@ const Footer = class extends React.Component {
       },
       {
         "link": {
-          "name": "Service 1",
-          "to": "/services"
-        }
-      },
-      {
-        "link": {
-          "name": "Service 2",
-          "to": "/services"
-        }
-      },
-      {
-        "link": {
           "name": "New Patients",
           "to": "/new-patients"
         }

@@ -9,10 +9,11 @@ export default class IndexPage extends React.Component {
 
   render() {
     const { data } = this.props
+    const { edges: home } = data.home
     const { edges: services } = data.services
     const { edges: blogs } = data.blogs
 
-    console.log(data)
+    console.log(home[0].node.frontmatter.sections.section)
     return (
       <Layout>
         <section className="hero is-medium is-bold is-primary">
@@ -122,33 +123,18 @@ export default class IndexPage extends React.Component {
         </section>
         <section>
           <div className="columns is-gapless">
-            <div className="column is-one-third has-background-secondary">
+          {home[0].node.frontmatter.sections.section
+            .map(section => (
+            <div className={'column is-one-third has-background-' + section.backgroundColor}>
               <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
-                <h3 className="has-text-white">Have A Question?</h3>
-                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
-                <Link className="button is-primary is-outlined is-inverted" to="/contact">
-                 Ask A Question
+                <h3 className="has-text-white">{section.heading}</h3>
+                <p className="has-text-white">{section.description}</p>
+                <Link className="button is-primary is-outlined is-inverted" to={section.link.destination}>
+                 {section.link.text}
                 </Link>
               </div>
             </div>
-            <div className="column is-one-third has-background-primary">
-              <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
-                <h3 className="has-text-white">Have A Question?</h3>
-                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
-                <Link className="button is-primary is-outlined is-inverted" to="/contact">
-                 Ask A Question
-                </Link>
-              </div>
-            </div>
-            <div className="column is-one-third has-background-primary-light">
-              <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
-                <h3 className="has-text-white">Have A Question?</h3>
-                <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
-                <Link className="button is-primary is-outlined is-inverted" to="/contact">
-                 Ask A Question
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
         <section className="section is-medium">
@@ -226,6 +212,14 @@ export default class IndexPage extends React.Component {
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
+    home: PropTypes.shape({
+      hero: PropTypes.object,
+      services: PropTypes.object,
+      appointments: PropTypes.object,
+      sections: PropTypes.object,
+      support: PropTypes.object,
+      about: PropTypes.object,
+    }),
     services: PropTypes.shape({
       edges: PropTypes.array,
     }),
@@ -237,6 +231,79 @@ IndexPage.propTypes = {
 
 export const homePageQuery = graphql`
   query HomePageQuery {
+    home: allMarkdownRemark(
+        filter: { frontmatter: { templateKey: { eq: "home-page" } }}
+      ) {
+        edges {
+          node {
+            id
+            html
+            frontmatter {
+              hero {
+                heading
+                description
+                link {
+                  text
+                  destination
+                }
+              }
+              services {
+                heading
+                description
+                thumbnail {
+                  alt
+                  image {
+                    id
+                  }
+                }
+              }
+              appointments {
+                heading
+                description
+                link {
+                  text
+                  destination
+                }
+                apps {
+                  alt
+                  image {
+                    id
+                  }
+                }
+              }
+              sections {
+                section {
+                  heading
+                  description
+                  backgroundColor
+                  link {
+                    text
+                    destination
+                  }
+                }
+              }
+              support {
+                heading
+                description
+                link {
+                  text
+                  destination
+                }
+              }
+              about {
+                heading
+                description
+                thumbnail {
+                  alt
+                  image {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
     services: allMarkdownRemark(
       filter: { frontmatter: { templateKey: { eq: "service-page" } }},
       limit: 4
