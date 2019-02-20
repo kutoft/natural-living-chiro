@@ -24,25 +24,24 @@ appointments:
     - alt: Google Play Store
       image: /img/favicon-32x32.png
 sections:
-  section:
-    - heading: Have A Question?
-      description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
-      backgroundColor: secondary
-      link:
-        text: Ask A Question
-        destination: /
-    - heading: Have A Question?
-      description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
-      backgroundColor: primary
-      link:
-        text: Ask A Question
-        destination: /
-    - heading: Have A Question?
-      description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
-      backgroundColor: primary-light
-      link:
-        text: Ask A Question
-        destination: /
+  - heading: Have A Question?
+    description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
+    backgroundColor: secondary
+    link:
+      text: Ask A Question
+      destination: /
+  - heading: Have A Question?
+    description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
+    backgroundColor: primary
+    link:
+      text: Ask A Question
+      destination: /
+  - heading: Have A Question?
+    description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.
+    backgroundColor: primary-light
+    link:
+      text: Ask A Question
+      destination: /
 support:
   heading: Have A Question?
   description: Ask us anything, at anytime. We will do our best to get back to you as soon as we can.

@@ -123,7 +123,7 @@ export default class IndexPage extends React.Component {
         </section>
         <section>
           <div className="columns is-gapless">
-          {home[0].node.frontmatter.sections.section
+          {home[0].node.frontmatter.sections
             .map(section => (
             <div className={'column is-one-third has-background-' + section.backgroundColor}>
               <div className="content has-text-centered" style={{padding: "4rem 2rem"}}>
