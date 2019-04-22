@@ -59,26 +59,26 @@ const Footer = class extends React.Component {
     this.menu = [
       {
         "link": {
-          "name": "Services",
-          "to": "/services"
-        }
-      },
-      {
-        "link": {
           "name": "New Patients",
           "to": "/new-patients"
         }
       },
       {
         "link": {
-          "name": "About",
-          "to": "/about"
+          "name": "Services",
+          "to": "/services"
         }
       },
       {
         "link": {
-          "name": "Blog",
-          "to": "/blog"
+          "name": "FAQs",
+          "to": "/frequently-asked-questions"
+        }
+      },
+      {
+        "link": {
+          "name": "About",
+          "to": "/about"
         }
       },
       {
@@ -102,11 +102,13 @@ const Footer = class extends React.Component {
           <div className="column is-narrow">
             <img src={logo} alt="Natural Living Chiropractic" style={{ width: '210px', maxHeight: '50px', marginRight: "20px" }} />
             <ul style={{marginTop: "6rem"}}>
+              {/*
               <li>
                 <Link className="button is-primary is-outlined is-fullwidth" to="#" style={{marginBottom: "5px"}}>
                   Shop
                 </Link>
               </li>
+              */}
               <li>
                 <Link className="button is-primary is-outlined is-fullwidth" to="/schedule-appointment" style={{marginBottom: "5px"}}>
                   Book Appointment

@@ -46,32 +46,49 @@ const Navbar = class extends React.Component {
       </div>
       <div id="navMenu" className="navbar-menu">
       <div className="navbar-end">
+        {/*
         <div className="navbar-item has-dropdown is-hoverable">
           <Link className="navbar-link" to="/services">
             Services
           </Link>
+          <div className="navbar-dropdown">
           <Services />
         </div>
+        */}
         <Link className="navbar-item" to="/new-patient">
           New Patients
         </Link>
+        <div className="navbar-item has-dropdown is-hoverable">
+          <Link className="navbar-link" to="/services">
+            Services
+          </Link>
+          <div className="navbar-dropdown">
+            <Link className="navbar-item" to="/frequently-asked-questions">
+              FAQs
+            </Link>
+          </div>
+        </div>
         <Link className="navbar-item" to="/about">
           About
         </Link>
+        {/*
         <Link className="navbar-item" to="/blog">
           Blog
         </Link>
+        */}
         <Link className="navbar-item" to="/contact">
           Contact
         </Link>
         <div className="navbar-item">
           <div className="buttons">
+            {/*
             <Link className="button is-primary is-outlined" to="#">
               Shop
             </Link>
-            <Link className="button is-primary" to="/schedule-appointment">
+            */}
+            <a className="button is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM">
               Book Appointment
-            </Link>
+            </a>
           </div>
         </div>
       </div>

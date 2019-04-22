@@ -36,16 +36,28 @@ export default class Index extends React.Component {
   render() {
     return (
       <Layout>
+        <section className="hero is-bold is-primary">
+          <div className="hero-body">
+            <div className="container">
+              <div className="columns">
+                <div className="column is-12-mobile is-9-tablet is-6-desktop">
+                  <h1 className="title is-size-1">
+                    Contact
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <section className="section">
           <div className="container">
             <div className="columns">
               <div className="column is-8 is-offset-2">
                 <div className="content">
-                  <h2 className="is-size-1">Ask A Question</h2>
-                  <p></p>
+                  <h2 className="is-size-2">Reach Out.</h2>
+                  <p>We love hearing from both new and existing panients with any questions you may have. We promise to get back to you in a timely maner.</p>
                 </div>
                 <div className="content">
-                  <h1 className="is-size-3">Contact</h1>
                   <form
                     name="contact"
                     method="post"
@@ -63,19 +75,19 @@ export default class Index extends React.Component {
                       </label>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor={"name"} >Your name</label>
+                      <label className="label" htmlFor={"name"} >Full Name</label>
                       <div className="control">
                         <input className="input" type={"text"} name={"name"} onChange={this.handleChange} id={"name"} required={true} />
                       </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor={"email"}>Email</label>
+                      <label className="label" htmlFor={"email"}>Email Address</label>
                         <div className="control">
                           <input className="input" type={"email"} name={"email"} onChange={this.handleChange} id={"email"} required={true} />
                         </div>
                     </div>
                     <div className="field">
-                      <label className="label" htmlFor={"message"}>Message</label>
+                      <label className="label" htmlFor={"message"}>Message or Question</label>
                       <div className="control">
                         <textarea className="textarea" name={"message"} onChange={this.handleChange} id={"message"} required={true} />
                       </div>

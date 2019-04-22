@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-netlify-cms",
-  "description": "Example Gatsby, and Netlify CMS project",
-  "version": "1.1.3",
-  "author": "Austin Green",
+  "name": "natural-living-chiro",
+  "description": "Natural Living Chiropractic Website",
+  "version": "1.0.0",
+  "author": "Kevin Utoft",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
     "@fortawesome/pro-light-svg-icons": "^5.6.3",

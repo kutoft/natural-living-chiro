@@ -2,17 +2,16 @@ import React from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import PropTypes from "prop-types"
 
-const Services = ({ data }) => (
-  <ul className="services">
-    {/* get dynamic list from graphql */}
-    {data.allMarkdownRemark.edges
-    .map(({ node: service }, index) => (
-      <li key={index} className="service">
-        <h2>{service.frontmatter.title}</h2>
-        <p>{service.frontmatter.description}</p>
-      </li>
+const ServicesMenuList = ({ data }) => (
+  <div className="navbar-dropdown">
+   {/* get dynamic list from graphql */}
+   {data.allMarkdownRemark.edges
+   .map(({ node: service }, index) => (
+     <Link className="navbar-item" key={index} to={service.fields.slug}>
+       {service.frontmatter.title}
+     </Link>
    ))}
-  </ul>
+  </div>
 )
 
 export default props => (
@@ -31,25 +30,17 @@ export default props => (
               frontmatter {
                 templateKey
                 title
-                description
-                thumbnail {
-                  alt
-                  image {
-                    id
-                    relativePath
-                  }
-                }
               }
             }
           }
         }
       }
     `}
-    render={data => <Services data={data} {...props} />}
+    render={data => <ServicesMenuList data={data} {...props} />}
   />
 )
 
-Services.propTypes = {
+ServicesMenuList.propTypes = {
   data: PropTypes.shape({
     services: PropTypes.shape({
       edges: PropTypes.array,

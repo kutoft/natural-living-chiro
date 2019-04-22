@@ -9,45 +9,51 @@ export const ServicePageTemplate = ({ title, image, description, content, conten
   const PageContent = contentComponent || Content
 
   return (
-    <div className="container">
-      <div className="columns">
-        <div className="column is-8 is-offset-2">
-          <div className="content">
-            <div
-              className="full-width-image-container margin-top-0"
-              style={{
-                backgroundImage: `url(/img/${image.relativePath})`,
-              }}
-            >
-              <h1
-                className="has-text-weight-bold is-size-1 has-background-secondary"
-                style={{
-                  color: 'white',
-                  padding: '1rem 1.25rem',
-                }}
-              >
-                {title}
-              </h1>
-            </div>
-          </div>
-          <div className="section">
-            <p>{description}</p>
-          </div>
-          <div className="section">
-            <PageContent className="content" content={content} />
-          </div>
-          <div className="section">
-            <div className="content">
-              <h2>Frequestly Asked Questions</h2>
-              {faqs
-              .map((faq, index) => (
-                <AccordionFAQs key={index} data={faq}></AccordionFAQs>
-              ))}
+    <>
+      <section className="hero is-bold is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <div className="columns">
+              <div className="column is-12-mobile">
+                <h1 className="title is-size-1">
+                  {title}
+                </h1>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+      <div
+        className="full-width-image-container margin-top-0 margin-bottom-0"
+        style={{
+          backgroundImage: `url(/img/${image.relativePath})`,
+        }}
+      >
       </div>
-    </div>
+      <section className="section">
+        <div className="container">
+          <div className="columns">
+            <div className="column is-8 is-offset-2">
+              <div className="section">
+                <p>{description}</p>
+              </div>
+              <div className="section">
+                <PageContent className="content" content={content} />
+              </div>
+              <div className="section">
+                <div className="content">
+                  <h2>Frequestly Asked Questions</h2>
+                  {faqs
+                  .map((faq, index) => (
+                    <AccordionFAQs key={index} index={index} data={faq}></AccordionFAQs>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 

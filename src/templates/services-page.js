@@ -1,148 +1,90 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import Img from "gatsby-image"
 import Layout from '../components/Layout'
-import Features from '../components/Features'
-import Testimonials from '../components/Testimonials'
-import Pricing from '../components/Pricing'
-import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
 export const ServicesPageTemplate = ({
-  image,
-  title,
-  heading,
-  description,
-  intro,
-  main,
-  testimonials,
-  fullImage,
-  pricing,
+  data,
 }) => (
-  <div className="container">
-    <div className="columns">
-      <div className="column is-8 is-offset-2">
-        <div className="content">
-          <div
-            className="full-width-image-container margin-top-0"
-            style={{
-              backgroundImage: `url(${
-                !!image.childImageSharp
-                  ? image.childImageSharp.fluid.src
-                  : image
-              })`,
-            }}
-          >
-            <h2
-              className="has-text-weight-bold is-size-1"
-              style={{
-                boxShadow: '0.5rem 0 0 #f40, -0.5rem 0 0 #f40',
-                backgroundColor: '#f40',
-                color: 'white',
-                padding: '1rem',
-              }}
-            >
-              {title}
-            </h2>
-          </div>
+  <>
+    <section className="hero is-bold is-primary">
+      <div className="hero-body">
+        <div className="container">
           <div className="columns">
-            <div className="column is-7">
-              <h3 className="has-text-weight-semibold is-size-2">
-                {heading}
-              </h3>
-              <p>{description}</p>
+            <div className="column is-12-mobile">
+              <h1 className="title is-size-1">
+                Services
+              </h1>
             </div>
           </div>
-          <Features gridItems={intro.blurbs} />
-          <div className="columns">
-            <div className="column is-7">
-              <h3 className="has-text-weight-semibold is-size-3">
-                {main.heading}
-              </h3>
-              <p>{main.description}</p>
-            </div>
-          </div>
-          <div className="tile is-ancestor">
-            <div className="tile is-vertical">
-              <div className="tile">
-                <div className="tile is-parent is-vertical">
-                  <article className="tile is-child">
-                    <PreviewCompatibleImage imageInfo={main.image1} />
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child">
-                    <PreviewCompatibleImage imageInfo={main.image2} />
-                  </article>
-                </div>
-              </div>
-              <div className="tile is-parent">
-                <article className="tile is-child">
-                  <PreviewCompatibleImage imageInfo={main.image3} />
-                </article>
-              </div>
-            </div>
-          </div>
-          <Testimonials testimonials={testimonials} />
-          <div
-            className="full-width-image-container"
-            style={{
-              backgroundImage: `url(${
-                fullImage.childImageSharp
-                  ? fullImage.childImageSharp.fluid.src
-                  : fullImage
-              })`,
-            }}
-          />
-          <h2 className="has-text-weight-semibold is-size-2">
-            {pricing.heading}
-          </h2>
-          <p className="is-size-5">{pricing.description}</p>
-          <Pricing data={pricing.plans} />
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+    <section className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-8 is-offset-2">
+            <div className="content">
+              <h2>Take Control Of Your Health</h2>
+              <p>
+                Natural Living Chiropractic provides a wide ranges of services and techinques designed for the whole body. Everyday we help our patients through their rehabilitation and see the countless benefits of people taking control of their health through chiropractic care.
+              </p>
+              <ul className="services">
+                {/* get dynamic list from graphql */}
+                {data.allMarkdownRemark.edges
+                .map(({ node: service }, index) => (
+                  <li key={index} className="service">
+                    {console.log(service)}
+                    <div className="columns">
+                      <div className="column is-4">
+                        <Img
+                          fluid={service.frontmatter.thumbnail.image.childImageSharp.fluid}
+                          alt={service.frontmatter.thumbnail.alt}
+                        />
+                      </div>
+                      <div className="column is-8">
+                        <h3>{service.frontmatter.title}</h3>
+                        <p>{service.frontmatter.description}</p>
+                        <div className="buttons">
+                          <a className="button is-small is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM">
+                            Book Appointment
+                          </a>
+                          <Link className="button is-small is-primary is-outlined" to="/new-patient">
+                            New Patient
+                          </Link>
+                          <Link
+                            className="button is-small is-right"
+                            to={service.fields.slug}
+                            style={{
+                              marginLeft: 'auto'
+                            }}
+                          >
+                            Learn More
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+               ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
 )
 
 ServicesPageTemplate.propTypes = {
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  title: PropTypes.string,
-  heading: PropTypes.string,
-  description: PropTypes.string,
-  intro: PropTypes.shape({
-    blurbs: PropTypes.array,
-  }),
-  main: PropTypes.shape({
-    heading: PropTypes.string,
-    description: PropTypes.string,
-    image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  }),
-  testimonials: PropTypes.array,
-  fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  pricing: PropTypes.shape({
-    heading: PropTypes.string,
-    description: PropTypes.string,
-    plans: PropTypes.array,
-  }),
+  data: PropTypes.object
 }
 
 const ServicesPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
-
   return (
     <Layout>
       <ServicesPageTemplate
-        image={frontmatter.image}
-        title={frontmatter.title}
-        heading={frontmatter.heading}
-        description={frontmatter.description}
-        intro={frontmatter.intro}
-        main={frontmatter.main}
-        testimonials={frontmatter.testimonials}
-        fullImage={frontmatter.full_image}
-        pricing={frontmatter.pricing}
+        data={data}
       />
     </Layout>
   )
@@ -150,7 +92,7 @@ const ServicesPage = ({ data }) => {
 
 ServicesPage.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
     }),
   }),
@@ -159,89 +101,36 @@ ServicesPage.propTypes = {
 export default ServicesPage
 
 export const servicesPageQuery = graphql`
-  query ServicesPage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      frontmatter {
-        title
-        image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
+query {
+  allMarkdownRemark(
+    filter: { frontmatter: { templateKey: { eq: "service-page" }, active: { eq: true } } }
+    sort: { fields: frontmatter___order }
+  ) {
+    edges {
+      node {
+        id
+        fields {
+          slug
         }
-        heading
-        description
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 240, quality: 64) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            text
-          }
-          heading
+        frontmatter {
+          templateKey
+          active
+          order
+          title
           description
-        }
-        main {
-          heading
-          description
-          image1 {
+          thumbnail {
             alt
             image {
               childImageSharp {
-                fluid(maxWidth: 526, quality: 92) {
+                fluid {
                   ...GatsbyImageSharpFluid
                 }
               }
             }
-          }
-          image2 {
-            alt
-            image {
-              childImageSharp {
-                fluid(maxWidth: 526, quality: 92) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          image3 {
-            alt
-            image {
-              childImageSharp {
-                fluid(maxWidth: 1075, quality: 72) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-        }
-        testimonials {
-          author
-          quote
-        }
-        full_image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        pricing {
-          heading
-          description
-          plans {
-            description
-            items
-            plan
-            price
           }
         }
       }
     }
   }
+}
 `

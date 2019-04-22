@@ -93,6 +93,8 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 
 .margin-top-0
   margin-top: 0 !important
+.margin-bottom-0
+  margin-bottom: 0 !important
 
 .has-bg
   background-repeat: no-repeat
@@ -142,16 +144,14 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
 
 .card
   .card-header
-    background-color: $secondary
+    transition: background-color 0.3s ease-in-out
     &:hover
-      background-color: darken($secondary, 7)
+      background-color: $light
+  .card-border
+    height: 3px
   .card-content
     display: none
   &.open
-    .card-header
-      background-color: darken($secondary, 15)
-      &:hover
-        background-color: darken($secondary, 7)
     .card-content
       display: block
 
@@ -180,3 +180,13 @@ a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:hover, .navbar-link.i
       color: $black
     .date
       background-color: $primary-light
+
+
+.content
+  .services
+    padding: 0
+    margin: 2rem 0 0 0
+    .service
+      margin-bottom: 2rem
+      list-style-type: none
+      padding: 0

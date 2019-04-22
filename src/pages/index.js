@@ -303,7 +303,8 @@ export const homePageQuery = graphql`
         }
       },
     services: allMarkdownRemark(
-      filter: { frontmatter: { templateKey: { eq: "service-page" } }},
+      filter: { frontmatter: { templateKey: { eq: "service-page" }, active: { eq: true } }},
+      sort: { fields: frontmatter___order },
       limit: 4
     ) {
       edges {
