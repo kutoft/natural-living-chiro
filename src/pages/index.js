@@ -113,9 +113,9 @@ export default class IndexPage extends React.Component {
                 <div className="content has-text-centered">
                   <h3 className="has-text-white">Schedule Your Appointments Online</h3>
                   <p className="has-text-white">Now its easier than ever to schedule your appointments, just fill out our online form and you are all set.</p>
-                  <Link className="button is-primary is-medium" to="/appointment">
+                  <a className="button is-primary is-medium" href="https://www.schedulicity.com/scheduling/NLCQQM" target="_blank">
                    Book Appointment
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>

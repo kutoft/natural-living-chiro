@@ -54,7 +54,7 @@ export default class Index extends React.Component {
             <div className="columns">
               <div className="column is-8 is-offset-2">
                 <div className="content">
-                  <h2 className="is-size-2">Reach Out.</h2>
+                  <h2 className="is-size-2">Reach Out</h2>
                   <p>We love hearing from both new and existing panients with any questions you may have. We promise to get back to you in a timely maner.</p>
                 </div>
                 <div className="content">
