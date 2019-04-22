@@ -86,7 +86,7 @@ const Navbar = class extends React.Component {
               Shop
             </Link>
             */}
-            <a className="button is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM">
+            <a className="button is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM" target="_blank">
               Book Appointment
             </a>
           </div>

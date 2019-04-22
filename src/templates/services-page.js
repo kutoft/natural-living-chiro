@@ -47,7 +47,7 @@ export const ServicesPageTemplate = ({
                         <h3>{service.frontmatter.title}</h3>
                         <p>{service.frontmatter.description}</p>
                         <div className="buttons">
-                          <a className="button is-small is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM">
+                          <a className="button is-small is-primary" href="https://www.schedulicity.com/scheduling/NLCQQM" target="_blank">
                             Book Appointment
                           </a>
                           <Link className="button is-small is-primary is-outlined" to="/new-patient">

@@ -41,7 +41,7 @@ export default class IndexPage extends React.Component {
             <div className="columns is-variable is-6-desktop">
               <div className="column is-half">
                 <figure className="image">
-                  <img src="/img/coffee-gear.png" alt="coffee" />
+                  <img src="/img/graston-technique.jpg" alt="Graston Technique" />
                 </figure>
               </div>
               <div className="column is-half">
@@ -121,6 +121,7 @@ export default class IndexPage extends React.Component {
             </div>
           </div>
         </section>
+        {/*
         <section>
           <div className="columns is-gapless">
           {home[0].node.frontmatter.sections
@@ -137,6 +138,8 @@ export default class IndexPage extends React.Component {
             ))}
           </div>
         </section>
+        */}
+        {/*
         <section className="section is-medium">
           <div className="container">
             <div className="content has-text-centered">
@@ -190,7 +193,8 @@ export default class IndexPage extends React.Component {
               </div>
           </div>
         </section>
-        <section className="section is-medium has-bg has-bg-covered has-bg-center" style={{backgroundImage: 'url(/img/products-full-width.jpg)'}}>
+        */}
+        <section className="section is-medium has-bg has-bg-covered has-bg-center" style={{backgroundImage: 'url(/img/graston-technique.jpg)'}}>
           <div className="container">
             <div className="columns is-desktop">
               <div className="column is-8 is-offset-2">
@@ -198,7 +202,7 @@ export default class IndexPage extends React.Component {
                   <h3 className="has-text-white">Have A Question?</h3>
                   <p className="has-text-white">Ask us anything, at anytime. We will do our best to get back to you as soon as we can.</p>
                   <Link className="button is-primary is-medium" to="/contact">
-                   Ask A Question
+                   Reach Out
                   </Link>
                 </div>
               </div>

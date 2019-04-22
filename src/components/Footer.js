@@ -110,9 +110,9 @@ const Footer = class extends React.Component {
               </li>
               */}
               <li>
-                <Link className="button is-primary is-outlined is-fullwidth" to="/schedule-appointment" style={{marginBottom: "5px"}}>
+                <a className="button is-primary is-outlined is-fullwidth" href="https://www.schedulicity.com/scheduling/NLCQQM" target="_blank" style={{marginBottom: "5px"}}>
                   Book Appointment
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

@@ -6,7 +6,7 @@ title: Cupping
 description: Cupping therapy helps promote blood circulation and brings fresh oxygen to the area in order to improve your body's natural healing abilities. Cupping works by placing special cups on your skin for a few minutes to create suction. Some of the many benefits include helping with pain, inflammation, blood flow, relaxation and well-being, and as a type of deep-tissue massage.
 thumbnail:
   alt: A close-up of a paper filter filled with ground coffee
-  image: /img/products-grid3.jpg
+  image: /img/graston-technique.jpg
 faqs:
   - question: What is Cupping?
     answer: Cupping creates a suction to pull the muscles up into the cups, releasing tight fascia and bringing blood supply to the surface of the skin, allowing the blood to recirculate and bring fresh oxygen and nutrients to the area.
